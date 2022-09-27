@@ -28,7 +28,7 @@ def kaito(kotae):
     if n != kal:
         print("不正解")
     else:
-        print("正解.欠損を1つずつ入力.")
+        print("正解,欠損を1つずつ入力.")
         for i in range(n):
             c = input(f"{i+1}文字目を入力：")
             if c not in kotae:
