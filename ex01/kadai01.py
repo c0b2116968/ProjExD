@@ -28,11 +28,11 @@ def kaito(kotae):
     if n != kal:
         print("不正解")
     else:
-        print("正解,欠損を1つずつ入力.")
+        print("正解,欠損を1つずつ入力.")    #syuusei
         for i in range(n):
             c = input(f"{i+1}文字目を入力：")
             if c not in kotae:
-                print("不正解です．またチャレンジしてください．")
+                print("不正解．またチャレンジ．")
                 return False
             else:
                 kotae.remove(c)
