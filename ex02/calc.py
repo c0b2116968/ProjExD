@@ -50,7 +50,7 @@ btn = tk.Button(root,text=f"=", font=("", 30), width=4, height=1) #=のボタン
 btn.bind("<1>",click_equal)
 btn.grid(row=r, column=c)
 
-btn = tk.Button(root,text="AC", font=("",30), width=4, height=1) #ACのボタンについて
+btn = tk.Button(root,text="AC", font=("",30), width=4, height=1,bg="red",fg = "white") #ACのボタンについて #色の修正
 btn.bind("<1>",click_del)
 btn.grid(row=r+1, column=0)
 
