@@ -24,8 +24,8 @@ def click_reverse(event):    #符号の反転関数
 
 def click_back(event):    #C --一文字消す処理の関数
     br = entry.get()
-    entry.delete(0,tk.END)
     k = br[0:-1]
+    entry.delete(0,tk.END)
     entry.insert(tk.END,k)
 
 root = tk.Tk()
