@@ -31,6 +31,12 @@ def main_proc():
             mx += 1
         if key == "Right":
             mx -= 1
+    
+    if mx == gx and my == gy: #ゴールについたときの処理
+        canv.create_text(750,450,text="Gool!!",font=("",150),fill="green") #文字を表示させる
+
+    elif mx == nx and my == ny: #敵についてしまったときの処理
+        canv.create_text(750,450,text="DEAD",font=("",150),fill="red") #文字を表示させる
 
     canv.coords("tori", cx, cy)
     root.after(100, main_proc)
@@ -40,15 +46,25 @@ if __name__ == "__main__":
     root = tk.Tk()
     root.title("迷えるこうかとん") #1
 
-    mx,my = 1,1
+    mx,my = 1,1  #自分の座標
+    gx,gy = 13,1 # ゴールの座標
+    nx,ny = 13,7 #敵の座標
 
     canv = tk.Canvas(root,width=1500,height=900,bg="black")
     canv.pack()  #2
-
+ 
     ml = mm.make_maze(15, 9) #9
     ms = mm.show_maze(canv, ml) #10
 
-    tori = tk.PhotoImage(file="fig/0.png")
+    gool = tk.PhotoImage(file="fig/8.png")  #ゴールの写真表示
+    zx,zy = (gx*100)+50, (gy*100)+50
+    canv.create_image(zx,zy,image=gool,tag="gool")
+
+    ene = tk.PhotoImage(file="fig/ene.png")  #敵の写真追加
+    px,py = (nx*100)+50, (ny*100)+50
+    canv.create_image(px,py,image=ene,tag="ene")
+
+    tori = tk.PhotoImage(file="fig/2.png")
     cx,cy = (mx*100)+50, (my*100)+50 
     canv.create_image(cx, cy, image=tori, tag="tori") #3
 
