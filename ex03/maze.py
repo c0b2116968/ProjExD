@@ -11,29 +11,18 @@ def key_up(event):
 
 def main_proc():
     global cx, cy, mx, my
-    if key == "Up":
+    if key == "Up" and ml[my-1][mx] != 1: #修正箇所
         my -= 1
-    if key == "Down":
+    elif key == "Down" and ml[my+1][mx] != 1:
         my += 1
-    if key == "Left":
+    elif key == "Left" and ml[my][mx-1] != 1:
         mx -= 1
-    if key == "Right":
+    elif key == "Right" and ml[my][mx+1] != 1:
         mx += 1
-    if ml[my][mx] == 0:
-        cx, cy = mx*100+50, my*100+50
-
-    else:
-        if key == "Up":
-            my += 1
-        if key == "Down":
-            my -= 1
-        if key == "Left":
-            mx += 1
-        if key == "Right":
-            mx -= 1
+    cx, cy = mx*100+50, my*100+50
     
     if mx == gx and my == gy: #ゴールについたときの処理
-        canv.create_text(750,450,text="Gool!!",font=("",150),fill="green") #文字を表示させる
+        canv.create_text(750,450,text="GOAL!!",font=("",150),fill="green") #文字を表示させる #修正箇所
 
     elif mx == nx and my == ny: #敵についてしまったときの処理
         canv.create_text(750,450,text="DEAD",font=("",150),fill="red") #文字を表示させる
@@ -58,7 +47,7 @@ if __name__ == "__main__":
 
     gool = tk.PhotoImage(file="fig/8.png")  #ゴールの写真表示
     zx,zy = (gx*100)+50, (gy*100)+50
-    canv.create_image(zx,zy,image=gool,tag="gool")
+    canv.create_image(zx,zy,image=gool,tag="gool") 
 
     ene = tk.PhotoImage(file="fig/ene.png")  #敵の写真追加
     px,py = (nx*100)+50, (ny*100)+50
