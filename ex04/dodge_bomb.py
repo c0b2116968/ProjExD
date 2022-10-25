@@ -2,8 +2,6 @@ import pygame as pg
 import sys
 from random import randint
 
-hp = 200
-
 def check_bound(obj_rct, scr_rct):
     """
     obj_rct:こうかとんrct,または,爆弾rct
@@ -17,11 +15,9 @@ def check_bound(obj_rct, scr_rct):
         tate = -1
     return yoko, tate
 
-
 def main():
-    global hp
-
-    # 練習1
+    hp = 200
+    # 1
     pg.display.set_caption("逃げろ！こうかとん")
     scrn_sfc = pg.display.set_mode((1600, 900))
     scrn_rct = scrn_sfc.get_rect()
@@ -30,8 +26,7 @@ def main():
 
     fonto = pg.font.Font(None,100)
     
-
-    # 練習3
+    # 3
     tori_sfc = pg.image.load("fig/6.png")
     tori_sfc = pg.transform.rotozoom(tori_sfc, 0, 2.0)
     tori_rct = tori_sfc.get_rect()
@@ -43,7 +38,7 @@ def main():
     d_rct = d_sfc.get_rect()
     d_rct.center = tori_rct.centerx, tori_rct.centery
 
-    # 練習5
+    # 5
     hl_sfc = pg.Surface((20, 20)) # 空のSurface
     hl_sfc.set_colorkey((0, 0, 0)) # 四隅の黒い部分を透過させる
     pg.draw.circle(hl_sfc, (0, 255, 0), (10, 10), 10) # 円を描く
@@ -58,13 +53,13 @@ def main():
     bomb_rct.centerx = randint(0, scrn_rct.width)
     bomb_rct.centery = randint(0, scrn_rct.height)
 
-    # 練習6
+    # 6
     vx, vy = 1, 1
     zx, zy = 2, 2 # 回復の移動処理
 
-    clock = pg.time.Clock() # 練習1
+    clock = pg.time.Clock() # 1
     while True:
-        scrn_sfc.blit(bg_sfc, bg_rct) # 練習2
+        scrn_sfc.blit(bg_sfc, bg_rct) # 2
         d_rct.center = tori_rct.centerx, tori_rct.centery
 
         if hp >= 200: # HPの色設定
@@ -76,9 +71,8 @@ def main():
         txt = fonto.render(str(f"HP{hp}"), True, col) # hp表示
         scrn_sfc.blit(txt,(200,100))
         
-        for event in pg.event.get(): # 練習2
-            if event.type == pg.QUIT:
-                return
+        for event in pg.event.get(): # 2
+            if event.type == pg.QUIT: return
 
         key_states = pg.key.get_pressed() #key操作
         if key_states[pg.K_UP]:    tori_rct.centery -= 1
@@ -101,12 +95,12 @@ def main():
         if hp <= 1: # 死んだときに骸骨表示する(delayはかけているが0にすると表示が遅い)
             scrn_sfc.blit(d_sfc, d_rct) # とりを骸骨にする
 
-        # 連取7
+        # 7
         yoko, tate = check_bound(bomb_rct, scrn_rct)
         vx *= yoko
         vy *= tate
-        bomb_rct.move_ip(vx, vy) # 練習6
-        scrn_sfc.blit(bomb_sfc, bomb_rct) # 練習5
+        bomb_rct.move_ip(vx, vy) # 6
+        scrn_sfc.blit(bomb_sfc, bomb_rct) # 5
 
         # 回復の移動処理
         x, y = check_bound(hl_rct, scrn_rct)
@@ -118,8 +112,8 @@ def main():
         if tori_rct.colliderect(hl_rct): # こうかとんと回復が重なったらhp+0.5
             hp += 0.5
 
-        # 練習8
-        if tori_rct.colliderect(bomb_rct): # こうかとんと爆弾が重なったらhp-1
+        # 8
+        if tori_rct.colliderect(bomb_rct): # こうかとんと爆弾が重なったらhp-0.5
             hp -= 0.5
         
         scrn_sfc.blit(txt,(200,100))
@@ -128,7 +122,7 @@ def main():
             pg.time.delay(2000)
             return
 
-        pg.display.update() #練習2
+        pg.display.update() #2
         clock.tick(1000)
 
 if __name__ == "__main__":
